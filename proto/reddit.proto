@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package reddit;
+
+// import "google/protobuf/empty.proto";
+
+message User {
+    string user_id = 1;  // A human-readable user ID
+  }
+
+  message Post {
+    string title = 1;    // Title of the post
+    string text = 2;     // Text content of the post
+  
+    // Optional video or image URL
+    oneof media {
+      string video_url = 3;
+      string image_url = 4;
+    }
+    string subreddit = 5;
+    string author = 6;// Optional author (not included as it's optional in this universe)
+    int32 score = 7;     // Score of the post, can be negative
+    State state = 8;     // State of the post
+    int64 publication_date = 9; // Publication date in Unix timestamp
+  
+    enum State {
+      NORMAL = 0;
+      LOCKED = 1;
+      HIDDEN = 2; // Another word for deleted
+    }
+  }
+
+  message Comment {
+    string author = 1;   // Author of the comment (required)
+    string text = 2;     // Text content of the comment
+    int32 score = 3;     // Score of the comment, can be negative
+    CommentState state = 4; // State of the comment
+    int64 publication_date = 5; // Publication date in Unix timestamp
+  
+    enum CommentState {
+      NORMAL = 0;
+      HIDDEN = 1; // Comment is hidden
+    }
+  }
+
+  message Subreddit {
+    string name = 1; // Human-readable name of the subreddit
+    Visibility status = 2; // Visibility status of the subreddit
+    repeated string tags = 3; // Tags associated with the subreddit
+  
+    enum Visibility {
+      PUBLIC = 0;
+      PRIVATE = 1;
+      HIDDEN = 2;
+    }
+  }
+  
