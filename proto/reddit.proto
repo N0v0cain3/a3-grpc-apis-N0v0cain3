@@ -4,24 +4,62 @@ package reddit;
 
 // import "google/protobuf/empty.proto";
 
+service Reddit {
+  rpc PingPong(PingRequest) returns (PongResponse) {};
+  rpc CreatePost(CreatePostRequest) returns (CreatePostResponse) {};
+  rpc VotePost(VotePostRequest) returns (VotePostResponse) {};
+
+}
+
+// Vote on Post, request and response
+message VotePostRequest {
+  int32 post_id = 1;  // ID of the post to vote
+  bool upvote = 2;     // True for upvote, false for downvote
+}
+
+message VotePostResponse {
+  int32 new_score = 1;  // Updated score of the post after voting
+}
+
+// Create Request request and response
+message CreatePostRequest {
+Post post = 1;
+}
+
+message CreatePostResponse{
+  repeated Post posts = 1;
+}
+
+
+// Ping and Pong - testing server
+message PingRequest{
+   string message =  1;
+   int32 val = 2;
+}
+
+message PongResponse{
+   string message = 1;
+}
+
 message User {
     string user_id = 1;  // A human-readable user ID
   }
 
   message Post {
-    string title = 1;    // Title of the post
-    string text = 2;     // Text content of the post
+    int32 id = 1;
+    string title = 2;    // Title of the post
+    string text = 3;     // Text content of the post
   
     // Optional video or image URL
     oneof media {
-      string video_url = 3;
-      string image_url = 4;
+      string video_url = 4;
+      string image_url = 5;
     }
-    string subreddit = 5;
-    string author = 6;// Optional author (not included as it's optional in this universe)
-    int32 score = 7;     // Score of the post, can be negative
-    State state = 8;     // State of the post
-    int64 publication_date = 9; // Publication date in Unix timestamp
+    string subreddit = 6;
+    string author = 7;// Optional author (not included as it's optional in this universe)
+    int32 score = 8;     // Score of the post, can be negative
+    State state = 9;     // State of the post
+    int64 publication_date = 10; // Publication date in Unix timestamp
   
     enum State {
       NORMAL = 0;

@@ -5,8 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "ts-node ./server/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node --loader ts-node/esm ./server/server.ts",
+    "client":"node --loader ts-node/esm ./client/client.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "tsc",
+    "build": "npm run compile && node ./out/server/server.js"
   },
   "repository": {
     "type": "git",

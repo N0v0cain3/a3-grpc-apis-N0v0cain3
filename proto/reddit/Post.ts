@@ -21,6 +21,7 @@ export type _reddit_Post_State =
 export type _reddit_Post_State__Output = typeof _reddit_Post_State[keyof typeof _reddit_Post_State]
 
 export interface Post {
+  'id'?: (number);
   'title'?: (string);
   'text'?: (string);
   'videoUrl'?: (string);
@@ -34,6 +35,7 @@ export interface Post {
 }
 
 export interface Post__Output {
+  'id': (number);
   'title': (string);
   'text': (string);
   'videoUrl'?: (string);
