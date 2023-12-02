@@ -18,17 +18,23 @@ export type _reddit_Comment_CommentState =
 export type _reddit_Comment_CommentState__Output = typeof _reddit_Comment_CommentState[keyof typeof _reddit_Comment_CommentState]
 
 export interface Comment {
+  'id'?: (number);
   'author'?: (string);
   'text'?: (string);
   'score'?: (number);
   'state'?: (_reddit_Comment_CommentState);
   'publicationDate'?: (number | string | Long);
+  'postId'?: (number);
+  'replyTo'?: (number);
 }
 
 export interface Comment__Output {
+  'id': (number);
   'author': (string);
   'text': (string);
   'score': (number);
   'state': (_reddit_Comment_CommentState__Output);
   'publicationDate': (string);
+  'postId': (number);
+  'replyTo': (number);
 }

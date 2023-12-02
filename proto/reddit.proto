@@ -2,13 +2,92 @@ syntax = "proto3";
 
 package reddit;
 
+
 // import "google/protobuf/empty.proto";
 
 service Reddit {
   rpc PingPong(PingRequest) returns (PongResponse) {};
   rpc CreatePost(CreatePostRequest) returns (CreatePostResponse) {};
   rpc VotePost(VotePostRequest) returns (VotePostResponse) {};
+  rpc GetPost(GetPostRequest) returns (GetPostResponse) {};
+  rpc CreateComment(CreateCommentRequest) returns (CreateCommentResponse) {};
+  rpc VoteComment(VoteCommentRequest) returns (VoteCommentResponse) {};
+  rpc TopVotedComments(GetTopCommentsRequest) returns (GetTopCommentsResponse) {};
+  rpc ExpandCommentBranch(ExpandCommentBranchRequest) returns (ExpandCommentBranchResponse) {};
+}
 
+
+// tree of depth 2
+message ExpandCommentBranchRequest {
+  int32 comment_id = 1;  // ID of the comment to expand
+  int32 limit = 2;       // Number of top comments to retrieve for each level
+}
+
+message CommentBranch {
+  Comment comment = 1;                   // The comment data
+  repeated CommentWithReplies replies = 2; // Top replies to the comment
+}
+
+message ExpandCommentBranchResponse {
+  CommentBranch comment_branch = 1;  // The expanded comment branch
+} 
+
+message CommentWithReplies {
+  Comment comment = 1;          // The comment data
+  repeated Temp replies = 2;         // Whether this comment has replies
+}
+
+message Temp{
+  Comment comment = 1;
+}
+
+// Top N comments
+message GetTopCommentsRequest {
+  int32 post_id = 1;  // ID of the post
+  int32 limit = 2;    // Number of top comments to retrieve
+}
+
+message CommentWithRepliesInfo {
+  Comment comment = 1;          // The comment data
+  bool has_replies = 2;         // Whether this comment has replies
+}
+
+message GetTopCommentsResponse {
+  repeated CommentWithRepliesInfo top_comments = 1; // List of top comments with replies info
+}
+
+// upVoting or downvoting a comment
+
+message VoteCommentRequest {
+  int32 comment_id = 1;  // ID of the comment to vote
+  bool upvote = 2;       // True for upvote, false for downvote
+}
+
+message VoteCommentResponse {
+  int32 new_score = 1;   // Updated score of the comment after voting
+}
+
+// Creating comment request and response
+message CreateCommentRequest{
+  string author = 1;
+  string text = 2;
+  int32 post_id = 3;
+  int32 reply_to = 4; // Optional: ID of the comment to which this is a reply
+
+}
+
+message CreateCommentResponse{
+  Comment comment = 1;
+ }
+
+// Get post request
+message GetPostRequest {
+  int32 post_id = 1;
+}
+
+// The response message should contain the post data.
+message GetPostResponse {
+  Post post = 1;
 }
 
 // Vote on Post, request and response
@@ -69,17 +148,28 @@ message User {
   }
 
   message Comment {
-    string author = 1;   // Author of the comment (required)
-    string text = 2;     // Text content of the comment
-    int32 score = 3;     // Score of the comment, can be negative
-    CommentState state = 4; // State of the comment
-    int64 publication_date = 5; // Publication date in Unix timestamp
-  
+    int32 id = 1;
+    string author = 2;   // Author of the comment (required)
+    string text = 3;     // Text content of the comment
+    int32 score = 4;     // Score of the comment, can be negative
+    CommentState state = 5; // State of the comment
+    int64 publication_date = 6; // Publication date in Unix timestamp
+    int32 post_id = 7;
+    int32 reply_to = 8;
     enum CommentState {
       NORMAL = 0;
       HIDDEN = 1; // Comment is hidden
     }
   }
+
+  /*
+    c1
+    c2
+      c4
+      c5
+    c3
+  
+  */
 
   message Subreddit {
     string name = 1; // Human-readable name of the subreddit

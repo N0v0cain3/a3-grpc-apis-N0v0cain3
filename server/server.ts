@@ -9,6 +9,12 @@ import * as db from '../db/db.ts'
 import { createPost } from './handlers/createPost.ts'
 import { Post, _reddit_Post_State, _reddit_Post_State__Output } from '../proto/reddit/Post.ts'
 import { votePost } from './handlers/votePost.ts'
+import { getPost } from './handlers/getPost.ts'
+import { createComment } from './handlers/createComment.ts'
+import { voteComment } from './handlers/voteComment.ts'
+import { toEditorSettings } from 'typescript'
+import { topVotedComments } from './handlers/topVotedComments.ts'
+import { expandCommentBranch } from './handlers/expandCommentBranch.ts'
 const PORT = 9000
 const PROTO_FILE = '../proto/reddit.proto'
 
@@ -43,7 +49,12 @@ server.addService(redditPackage.Reddit.service,{
         res(null,{message:"Pong"})
     },
     "CreatePost": createPost,
-    "VotePost": votePost
+    "VotePost": votePost,
+    "GetPost":getPost,
+    "CreateComment":createComment,
+    "VoteComment":voteComment,
+    "TopVotedComments":topVotedComments,
+    "ExpandCommentBranch":expandCommentBranch
 } as RedditHandlers
 
 )

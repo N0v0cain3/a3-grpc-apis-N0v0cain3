@@ -52,5 +52,47 @@ function onClientReady() {
             return
         }
         console.log(result)
+    }),
+    client.GetPost({postId:6},(err,result)=>{
+        if(err){
+            console.error(err)
+            return
+        }
+        console.log(result)
+    }),
+    client.CreateComment({ author: "scienceGeek", text: "Would love to visit Japan someday.", postId: 5, replyTo: 3 },(err,result)=>{
+        if(err){
+            console.error(err)
+            return
+        }
+        console.log(result)
+    }),
+    client.VoteComment({commentId:4, upvote:true}, (err,result)=>{
+        if(err){
+            console.error(err)
+            return
+        }
+        console.log(result)
+    }),
+    client.TopVotedComments({postId:1,limit:3}, (err,result)=>{
+        if(err){
+            console.error(err)
+            return
+        }
+        console.log(result.topComments)
+    }),
+    client.ExpandCommentBranch({commentId:1,limit:3},(err,result)=>{
+        const N = 3;
+
+        if(err){
+            console.error(err)
+            return
+        }
+
+        console.log(`${N} most voted comment for:  Comment`,result.commentBranch.comment)
+        for(let i=0;i<N;i++){
+        console.log(` ${i+1} rank comment  : `,result.commentBranch.replies[i].comment)
+        console.log(` ${i+1} rank comment replies : `,result.commentBranch.replies[i].replies)
+        }
     })
 }

@@ -16,11 +16,32 @@ export const posts = [
   ];
 
 export const comments = [
-    { author: "coolCoder", text: "Great post!", score: 5, state: 0, publication_date: 1633037000 },
-    { author: "user123", text: "I love Python for its simplicity.", score: 3, state: 0, publication_date: 1633123300 },
-    { author: "travelLover", text: "Amazing photo!", score: 4, state: 0, publication_date: 1633209700 },
-    { author: "artEnthusiast", text: "Very informative, thanks for sharing!", score: 6, state: 0, publication_date: 1633296100 },
-    { author: "scienceGeek", text: "Would love to visit Japan someday.", score: 2, state: 0, publication_date: 1633382500 }
+  { id: 13, author: "coolCoder", text: "Great post!", score: 5, state: 0, publication_date: 1633037000, post_id: 2, reply_to: null },
+  { id: 14, author: "user123", text: "I love Python for its simplicity.", score: 3, state: 0, publication_date: 1633123300, post_id: 2, reply_to: null },
+  { id: 15, author: "travelLover", text: "Amazing photo!", score: 4, state: 0, publication_date: 1633209700, post_id: 3, reply_to: 1 },
+  { id: 16, author: "artEnthusiast", text: "Very informative, thanks for sharing!", score: 6, state: 0, publication_date: 1633296100, post_id: 4, reply_to: null },
+
+
+  //
+  { id: 1, author: "userA", text: "Top-level comment 1", score: 6, state: 0, publication_date: 1633400000, post_id: 1, reply_to: null },
+  { id: 2, author: "userB", text: "Top-level comment 2", score: 5, state: 0, publication_date: 1633403600, post_id: 1, reply_to: null },
+  { id: 3, author: "userC", text: "Top-level comment 3", score: 4, state: 0, publication_date: 1633407200, post_id: 1, reply_to: null },
+
+  // Replies to the first top-level comment
+  { id: 4, author: "userD", text: "Reply 1 to Comment 1", score: 7, state: 0, publication_date: 1633410800, post_id: 1, reply_to: 1 },
+  { id: 5, author: "userE", text: "Reply 2 to Comment 1", score: 6, state: 0, publication_date: 1633414400, post_id: 1, reply_to: 1 },
+  { id: 6, author: "userF", text: "Reply 3 to Comment 1", score: 4, state: 0, publication_date: 1633418000, post_id: 1, reply_to: 1 },
+
+  // Replies to the second top-level comment
+  { id: 7, author: "userG", text: "Reply 1 to Comment 2", score: 7, state: 0, publication_date: 1633421600, post_id: 1, reply_to: 4 },
+  { id: 8, author: "userH", text: "Reply 2 to Comment 2", score: 6, state: 0, publication_date: 1633425200, post_id: 1, reply_to: 4 },
+  { id: 9, author: "userI", text: "Reply 3 to Comment 2", score: 4, state: 0, publication_date: 1633428800, post_id: 1, reply_to: 4 },
+
+  // Replies to the third top-level comment
+  { id: 10, author: "userJ", text: "Reply 1 to Comment 3", score: 7, state: 0, publication_date: 1633432400, post_id: 1, reply_to: 5 },
+  { id: 11, author: "userK", text: "Reply 2 to Comment 3", score: 6, state: 0, publication_date: 1633436000, post_id: 1, reply_to: 5 },
+  { id: 12, author: "userL", text: "Reply 3 to Comment 3", score: 4, state: 0, publication_date: 1633439600, post_id: 1, reply_to: 5 }
+
   ];
 
 export const subreddits = [
