@@ -55,12 +55,9 @@ message ExpandCommentBranchResponse {
 
 message CommentWithReplies {
   Comment comment = 1;          // The comment data
-  repeated Temp replies = 2;         // Whether this comment has replies
+  repeated Comment replies = 2;         // Whether this comment has replie
 }
 
-message Temp{
-  Comment comment = 1;
-}
 
 // Top N comments
 message GetTopCommentsRequest {

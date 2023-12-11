@@ -27,6 +27,7 @@ export interface Post {
   'videoUrl'?: (string);
   'imageUrl'?: (string);
   'subreddit'?: (string);
+  'tags'?: (string);
   'author'?: (string);
   'score'?: (number);
   'state'?: (_reddit_Post_State);
@@ -41,6 +42,7 @@ export interface Post__Output {
   'videoUrl'?: (string);
   'imageUrl'?: (string);
   'subreddit': (string);
+  'tags': (string);
   'author': (string);
   'score': (number);
   'state': (_reddit_Post_State__Output);

@@ -30,7 +30,6 @@ export interface ProtoGrpcType {
     Post: MessageTypeDefinition
     Reddit: SubtypeConstructor<typeof grpc.Client, _reddit_RedditClient> & { service: _reddit_RedditDefinition }
     Subreddit: MessageTypeDefinition
-    Temp: MessageTypeDefinition
     UpdateScore: MessageTypeDefinition
     User: MessageTypeDefinition
     VoteCommentRequest: MessageTypeDefinition
