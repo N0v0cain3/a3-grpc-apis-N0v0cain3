@@ -3,9 +3,9 @@
 import type { Post as _reddit_Post, Post__Output as _reddit_Post__Output } from '../reddit/Post';
 
 export interface CreatePostResponse {
-  'posts'?: (_reddit_Post)[];
+  'newPost'?: (_reddit_Post | null);
 }
 
 export interface CreatePostResponse__Output {
-  'posts': (_reddit_Post__Output)[];
+  'newPost': (_reddit_Post__Output | null);
 }

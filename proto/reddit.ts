@@ -23,12 +23,15 @@ export interface ProtoGrpcType {
     GetPostResponse: MessageTypeDefinition
     GetTopCommentsRequest: MessageTypeDefinition
     GetTopCommentsResponse: MessageTypeDefinition
+    MonitorUpdatesRequest: MessageTypeDefinition
+    MonitorUpdatesResponse: MessageTypeDefinition
     PingRequest: MessageTypeDefinition
     PongResponse: MessageTypeDefinition
     Post: MessageTypeDefinition
     Reddit: SubtypeConstructor<typeof grpc.Client, _reddit_RedditClient> & { service: _reddit_RedditDefinition }
     Subreddit: MessageTypeDefinition
     Temp: MessageTypeDefinition
+    UpdateScore: MessageTypeDefinition
     User: MessageTypeDefinition
     VoteCommentRequest: MessageTypeDefinition
     VoteCommentResponse: MessageTypeDefinition

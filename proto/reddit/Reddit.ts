@@ -12,8 +12,8 @@ import type { GetPostRequest as _reddit_GetPostRequest, GetPostRequest__Output a
 import type { GetPostResponse as _reddit_GetPostResponse, GetPostResponse__Output as _reddit_GetPostResponse__Output } from '../reddit/GetPostResponse';
 import type { GetTopCommentsRequest as _reddit_GetTopCommentsRequest, GetTopCommentsRequest__Output as _reddit_GetTopCommentsRequest__Output } from '../reddit/GetTopCommentsRequest';
 import type { GetTopCommentsResponse as _reddit_GetTopCommentsResponse, GetTopCommentsResponse__Output as _reddit_GetTopCommentsResponse__Output } from '../reddit/GetTopCommentsResponse';
-import type { PingRequest as _reddit_PingRequest, PingRequest__Output as _reddit_PingRequest__Output } from '../reddit/PingRequest';
-import type { PongResponse as _reddit_PongResponse, PongResponse__Output as _reddit_PongResponse__Output } from '../reddit/PongResponse';
+import type { MonitorUpdatesRequest as _reddit_MonitorUpdatesRequest, MonitorUpdatesRequest__Output as _reddit_MonitorUpdatesRequest__Output } from '../reddit/MonitorUpdatesRequest';
+import type { MonitorUpdatesResponse as _reddit_MonitorUpdatesResponse, MonitorUpdatesResponse__Output as _reddit_MonitorUpdatesResponse__Output } from '../reddit/MonitorUpdatesResponse';
 import type { VoteCommentRequest as _reddit_VoteCommentRequest, VoteCommentRequest__Output as _reddit_VoteCommentRequest__Output } from '../reddit/VoteCommentRequest';
 import type { VoteCommentResponse as _reddit_VoteCommentResponse, VoteCommentResponse__Output as _reddit_VoteCommentResponse__Output } from '../reddit/VoteCommentResponse';
 import type { VotePostRequest as _reddit_VotePostRequest, VotePostRequest__Output as _reddit_VotePostRequest__Output } from '../reddit/VotePostRequest';
@@ -56,14 +56,10 @@ export interface RedditClient extends grpc.Client {
   getPost(argument: _reddit_GetPostRequest, options: grpc.CallOptions, callback: grpc.requestCallback<_reddit_GetPostResponse__Output>): grpc.ClientUnaryCall;
   getPost(argument: _reddit_GetPostRequest, callback: grpc.requestCallback<_reddit_GetPostResponse__Output>): grpc.ClientUnaryCall;
   
-  PingPong(argument: _reddit_PingRequest, metadata: grpc.Metadata, options: grpc.CallOptions, callback: grpc.requestCallback<_reddit_PongResponse__Output>): grpc.ClientUnaryCall;
-  PingPong(argument: _reddit_PingRequest, metadata: grpc.Metadata, callback: grpc.requestCallback<_reddit_PongResponse__Output>): grpc.ClientUnaryCall;
-  PingPong(argument: _reddit_PingRequest, options: grpc.CallOptions, callback: grpc.requestCallback<_reddit_PongResponse__Output>): grpc.ClientUnaryCall;
-  PingPong(argument: _reddit_PingRequest, callback: grpc.requestCallback<_reddit_PongResponse__Output>): grpc.ClientUnaryCall;
-  pingPong(argument: _reddit_PingRequest, metadata: grpc.Metadata, options: grpc.CallOptions, callback: grpc.requestCallback<_reddit_PongResponse__Output>): grpc.ClientUnaryCall;
-  pingPong(argument: _reddit_PingRequest, metadata: grpc.Metadata, callback: grpc.requestCallback<_reddit_PongResponse__Output>): grpc.ClientUnaryCall;
-  pingPong(argument: _reddit_PingRequest, options: grpc.CallOptions, callback: grpc.requestCallback<_reddit_PongResponse__Output>): grpc.ClientUnaryCall;
-  pingPong(argument: _reddit_PingRequest, callback: grpc.requestCallback<_reddit_PongResponse__Output>): grpc.ClientUnaryCall;
+  MonitorUpdates(metadata: grpc.Metadata, options?: grpc.CallOptions): grpc.ClientDuplexStream<_reddit_MonitorUpdatesRequest, _reddit_MonitorUpdatesResponse__Output>;
+  MonitorUpdates(options?: grpc.CallOptions): grpc.ClientDuplexStream<_reddit_MonitorUpdatesRequest, _reddit_MonitorUpdatesResponse__Output>;
+  monitorUpdates(metadata: grpc.Metadata, options?: grpc.CallOptions): grpc.ClientDuplexStream<_reddit_MonitorUpdatesRequest, _reddit_MonitorUpdatesResponse__Output>;
+  monitorUpdates(options?: grpc.CallOptions): grpc.ClientDuplexStream<_reddit_MonitorUpdatesRequest, _reddit_MonitorUpdatesResponse__Output>;
   
   TopVotedComments(argument: _reddit_GetTopCommentsRequest, metadata: grpc.Metadata, options: grpc.CallOptions, callback: grpc.requestCallback<_reddit_GetTopCommentsResponse__Output>): grpc.ClientUnaryCall;
   TopVotedComments(argument: _reddit_GetTopCommentsRequest, metadata: grpc.Metadata, callback: grpc.requestCallback<_reddit_GetTopCommentsResponse__Output>): grpc.ClientUnaryCall;
@@ -103,7 +99,7 @@ export interface RedditHandlers extends grpc.UntypedServiceImplementation {
   
   GetPost: grpc.handleUnaryCall<_reddit_GetPostRequest__Output, _reddit_GetPostResponse>;
   
-  PingPong: grpc.handleUnaryCall<_reddit_PingRequest__Output, _reddit_PongResponse>;
+  MonitorUpdates: grpc.handleBidiStreamingCall<_reddit_MonitorUpdatesRequest__Output, _reddit_MonitorUpdatesResponse>;
   
   TopVotedComments: grpc.handleUnaryCall<_reddit_GetTopCommentsRequest__Output, _reddit_GetTopCommentsResponse>;
   
@@ -118,7 +114,7 @@ export interface RedditDefinition extends grpc.ServiceDefinition {
   CreatePost: MethodDefinition<_reddit_CreatePostRequest, _reddit_CreatePostResponse, _reddit_CreatePostRequest__Output, _reddit_CreatePostResponse__Output>
   ExpandCommentBranch: MethodDefinition<_reddit_ExpandCommentBranchRequest, _reddit_ExpandCommentBranchResponse, _reddit_ExpandCommentBranchRequest__Output, _reddit_ExpandCommentBranchResponse__Output>
   GetPost: MethodDefinition<_reddit_GetPostRequest, _reddit_GetPostResponse, _reddit_GetPostRequest__Output, _reddit_GetPostResponse__Output>
-  PingPong: MethodDefinition<_reddit_PingRequest, _reddit_PongResponse, _reddit_PingRequest__Output, _reddit_PongResponse__Output>
+  MonitorUpdates: MethodDefinition<_reddit_MonitorUpdatesRequest, _reddit_MonitorUpdatesResponse, _reddit_MonitorUpdatesRequest__Output, _reddit_MonitorUpdatesResponse__Output>
   TopVotedComments: MethodDefinition<_reddit_GetTopCommentsRequest, _reddit_GetTopCommentsResponse, _reddit_GetTopCommentsRequest__Output, _reddit_GetTopCommentsResponse__Output>
   VoteComment: MethodDefinition<_reddit_VoteCommentRequest, _reddit_VoteCommentResponse, _reddit_VoteCommentRequest__Output, _reddit_VoteCommentResponse__Output>
   VotePost: MethodDefinition<_reddit_VotePostRequest, _reddit_VotePostResponse, _reddit_VotePostRequest__Output, _reddit_VotePostResponse__Output>

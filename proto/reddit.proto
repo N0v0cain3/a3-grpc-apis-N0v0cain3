@@ -3,10 +3,7 @@ syntax = "proto3";
 package reddit;
 
 
-// import "google/protobuf/empty.proto";
-
 service Reddit {
-  rpc PingPong(PingRequest) returns (PongResponse) {};
   rpc CreatePost(CreatePostRequest) returns (CreatePostResponse) {};
   rpc VotePost(VotePostRequest) returns (VotePostResponse) {};
   rpc GetPost(GetPostRequest) returns (GetPostResponse) {};
@@ -14,8 +11,32 @@ service Reddit {
   rpc VoteComment(VoteCommentRequest) returns (VoteCommentResponse) {};
   rpc TopVotedComments(GetTopCommentsRequest) returns (GetTopCommentsResponse) {};
   rpc ExpandCommentBranch(ExpandCommentBranchRequest) returns (ExpandCommentBranchResponse) {};
+
+  // EXTRA CREDIT monitor updates
+  rpc MonitorUpdates(stream MonitorUpdatesRequest) returns (stream MonitorUpdatesResponse);
+
 }
 
+
+// EXTRA CREDIT: Monitor updates bi-directional streaming 
+message MonitorUpdatesRequest {
+  oneof request_type {
+    int32 post_id = 1;      // Post ID for initial request
+    int32 comment_id = 2;   // Comment IDs for subsequent requests
+  }
+}
+
+message UpdateScore {
+  oneof entity_id {
+    int32 post_id = 1;      // Post ID
+    int32 comment_id = 2;   // Comment ID
+  }
+  int32 new_score = 3;      // Updated score
+}
+
+message MonitorUpdatesResponse {
+  repeated UpdateScore updates = 1; // Stream of score updates
+}
 
 // tree of depth 2
 message ExpandCommentBranchRequest {
@@ -106,7 +127,7 @@ Post post = 1;
 }
 
 message CreatePostResponse{
-  repeated Post posts = 1;
+   Post new_post = 1;
 }
 
 
@@ -135,10 +156,11 @@ message User {
       string image_url = 5;
     }
     string subreddit = 6;
-    string author = 7;// Optional author (not included as it's optional in this universe)
-    int32 score = 8;     // Score of the post, can be negative
-    State state = 9;     // State of the post
-    int64 publication_date = 10; // Publication date in Unix timestamp
+    string tags = 7; // subreddit tags attached to a post
+    string author = 8;// Optional author (not included as it's optional in this universe)
+    int32 score = 9;     // Score of the post, can be negative
+    State state = 10;     // State of the post
+    int64 publication_date = 11; // Publication date in Unix timestamp
   
     enum State {
       NORMAL = 0;
