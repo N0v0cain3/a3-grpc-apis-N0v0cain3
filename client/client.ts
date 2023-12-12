@@ -29,12 +29,8 @@ client.waitForReady(deadline, (err) => {
         return
     }
 
-    // onClientReady()
-    // retrievePost(client,'1')
-    // retrieveTopVotedComment(client,'1')
-    // expandCommentBranch(client,'1',1,()=>{
+    onClientReady()
 
-    // })
     highLevelFunction(client, 1, 1, (err, comment) => {
         if (err) {
             console.log(err)

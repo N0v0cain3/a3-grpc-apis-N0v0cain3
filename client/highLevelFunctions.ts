@@ -74,15 +74,15 @@ export function highLevelFunction(apiClient, postId, limit = 1, callback) {
             console.error(err);
             return
         }
-        console.log("result",result)
+        console.log("result", result)
         apiClient.TopVotedComments({ postId: result.post.id, limit: 1 }, (err, response) => {
             if (err) {
                 console.error(err);
                 return;
             }
 
-            console.log("response",response.topComments)
-            apiClient.ExpandCommentBranch({ commentId: response.topComments[0].comment.id, limit:1 }, (err, result) => {
+            console.log("response", response.topComments)
+            apiClient.ExpandCommentBranch({ commentId: response.topComments[0].comment.id, limit: 1 }, (err, result) => {
                 if (err) {
                     console.error(err);
                     return;
